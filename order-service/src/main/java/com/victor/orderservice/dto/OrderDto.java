@@ -1,6 +1,6 @@
 package com.victor.orderservice.dto;
 
-import com.victor.orderservice.model.DeliveryStatus;
+//import com.victor.orderservice.model.DeliveryStatus;
 import lombok.Getter;
 import lombok.Setter;
 
