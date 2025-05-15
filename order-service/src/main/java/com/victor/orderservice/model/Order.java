@@ -48,11 +48,11 @@ public class Order {
     @Positive
     private BigDecimal value;
 
-//    /**
-//     * Delivery status of the order.
-//     */
-//    @NotNull
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "delivery_status")
-//    private DeliveryStatus deliveryStatus;
+    /**
+     * Delivery status of the order.
+     */
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "delivery_status")
+    private DeliveryStatus deliveryStatus;
 }
