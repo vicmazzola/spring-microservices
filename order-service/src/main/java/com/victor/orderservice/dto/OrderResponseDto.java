@@ -1,6 +1,6 @@
 package com.victor.orderservice.dto;
 
-//import com.victor.orderservice.model.DeliveryStatus;
+import com.victor.orderservice.model.DeliveryStatus;
 import com.victor.orderservice.model.Order;
 
 import java.math.BigDecimal;
@@ -19,8 +19,8 @@ public record OrderResponseDto(
         Long orderNumber,
         String customerName,
         LocalDate orderDate,
-        BigDecimal value
-//        DeliveryStatus deliveryStatus
+        BigDecimal value,
+        DeliveryStatus deliveryStatus
 ) {
     /**
      * Creates an OrderResponseDto from an Order entity.
@@ -32,8 +32,8 @@ public record OrderResponseDto(
                 order.getOrderNumber(),
                 order.getCustomerName(),
                 order.getOrderDate(),
-                order.getValue()
-//                order.getDeliveryStatus()
+                order.getValue(),
+                order.getDeliveryStatus()
         );
     }
 }

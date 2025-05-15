@@ -1,6 +1,6 @@
 package com.victor.orderservice.dto;
 
-//import com.victor.orderservice.model.DeliveryStatus;
+import com.victor.orderservice.model.DeliveryStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,8 +34,8 @@ public class OrderDto {
      */
     private BigDecimal value;
 
-//    /**
-//     * Current delivery status of the order.
-//     */
-//    private DeliveryStatus deliveryStatus;
+    /**
+     * Current delivery status of the order.
+     */
+    private DeliveryStatus deliveryStatus;
 }

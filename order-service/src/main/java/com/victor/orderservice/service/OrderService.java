@@ -2,6 +2,8 @@ package com.victor.orderservice.service;
 
 import com.victor.orderservice.dto.OrderDto;
 import com.victor.orderservice.dto.OrderResponseDto;
+import com.victor.orderservice.exception.OrderNotFoundException;
+import com.victor.orderservice.model.DeliveryStatus;
 import com.victor.orderservice.model.Order;
 import com.victor.orderservice.repository.OrderRepository;
 import org.springframework.beans.BeanUtils;
@@ -29,23 +31,28 @@ public class OrderService {
     public OrderResponseDto create(OrderDto orderDto) {
         Order order = new Order();
         BeanUtils.copyProperties(orderDto, order);
-//        order.setDeliveryStatus(DeliveryStatus.PROCESSING);
+        order.setDeliveryStatus(DeliveryStatus.PROCESSING);
         Order created = orderRepository.save(order);
         return new OrderResponseDto(created);
     }
 
     /**
-     * Finds an order by its ID.
+     * Retrieves an order by its ID.
      *
      * @param orderNumber the ID of the order
      * @return the order as a response DTO
+     * @throws OrderNotFoundException if no order with the given ID is found
      */
-
+    public OrderResponseDto findById(Long orderNumber) {
+        Optional<Order> optional = orderRepository.findById(orderNumber);
+        return optional.map(OrderResponseDto::new)
+                .orElseThrow(() -> new OrderNotFoundException("Order " + orderNumber + " not found"));
+    }
 
     /**
      * Returns a list of all orders in the system.
      *
-     * @return list of response DTOs
+     * @return list of order response DTOs
      */
     public List<OrderResponseDto> findAll() {
         return orderRepository.findAll()
@@ -54,6 +61,17 @@ public class OrderService {
                 .toList();
     }
 
+    /**
+     * Deletes an order by its ID.
+     *
+     * @param orderNumber the ID of the order to delete
+     * @throws OrderNotFoundException if no order with the given ID is found
+     */
+    public void delete(Long orderNumber) {
+        Order order = orderRepository.findById(orderNumber)
+                .orElseThrow(() -> new OrderNotFoundException("Order " + orderNumber + " not found"));
+        orderRepository.delete(order);
+    }
 
     /**
      * Updates an existing order with the provided data.
