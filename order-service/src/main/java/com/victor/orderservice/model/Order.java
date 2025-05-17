@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * Entity representing an order placed by a customer.
  */
 @Entity
-@Table(name = "tb_orders")
+@Table(name = "tbl_orders")
 @Getter
 @Setter
 @NoArgsConstructor
